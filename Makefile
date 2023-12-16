@@ -1,5 +1,5 @@
-STUID = 221220000
-STUNAME = 张三
+STUID = QSX20210747
+STUNAME = unian
 
 # DO NOT modify the following code!!!
 
