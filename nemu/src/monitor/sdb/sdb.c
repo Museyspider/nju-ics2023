@@ -53,7 +53,7 @@ static int cmd_c(char *args) {
 
 
 static int cmd_q(char *args) {
-  // -----
+  // -----  如果程序没结束 让其执行一条ebreak指令
   if(nemu_state.state == NEMU_END || nemu_state.state == NEMU_ABORT)
   {
     return -1;
