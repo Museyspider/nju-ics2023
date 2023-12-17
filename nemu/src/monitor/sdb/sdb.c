@@ -71,7 +71,7 @@ static int cmd_si(char *args) {
   
   int len = strlen(args);
   int num = 0;
-  for(int i = len; i > 0; i --)
+  for(int i = 0; i < len; i ++)
   {
     if(args[i] - '0' > 9 || args[i] - '0' < 0)
     {
@@ -79,7 +79,7 @@ static int cmd_si(char *args) {
       printf("-----------");
       return 1;
     }
-    num += (args[i] - '0') * pow(10,i);  
+    num += (args[i] - '0') * pow(10,len - i);  
   }
   printf("%d\n", num);
 
