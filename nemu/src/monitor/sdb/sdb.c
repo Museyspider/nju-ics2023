@@ -55,7 +55,7 @@ static int cmd_c(char *args) {
 static int cmd_q(char *args) {
   // -----
   static const uint32_t ebreak = 0x00100073;
-  memcpy(guest_to_host(RESET_VECTOR), &ebreak, 1);
+  memcpy(guest_to_host(RESET_VECTOR), &ebreak, 4);
   cpu_exec(1);
   // -----
   return -1;
