@@ -54,13 +54,13 @@ static int cmd_c(char *args) {
 
 static int cmd_q(char *args) {
   // -----
+  if(nemu_state.state == NEMU_END || nemu_state.state == NEMU_ABORT)
+  {
+    return -1;
+  }
   static const uint32_t ebreak = 0x00100073;
   memcpy(guest_to_host(RESET_VECTOR), &ebreak, 4);
-  // if(nemu_state.state)
-  // {
-
-  // }
-  cpu_exec(0);
+  cpu_exec(1);
   // -----
   return -1;
 }
