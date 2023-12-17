@@ -60,7 +60,7 @@ static int cmd_q(char *args) {
   // {
 
   // }
-  cpu_exec(1);
+  cpu_exec(0);
   // -----
   return -1;
 }
