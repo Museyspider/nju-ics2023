@@ -47,4 +47,7 @@ $(clean-tools):
 clean-tools: $(clean-tools)
 clean-all: clean distclean clean-tools
 
-.PHONY: run gdb run-env clean-tools clean-all $(clean-tools)
+debug:
+	@echo $(CFLAGS)
+
+.PHONY: run gdb run-env clean-tools clean-all $(clean-tools) debug

@@ -91,7 +91,20 @@ static int cmd_si(char *args) {
 }
 
 static int cmd_info(char *args) {
-  cpu_exec(-1);
+  int len = strlen(args);
+  if(len > 1)
+  {
+    // 参数错误
+    return 1;
+  }
+  if(args[0] == 'r')
+  {
+    isa_reg_display();
+  }
+  if(args[0] == 'w')
+  {
+
+  }
   return 0;
 }
 
