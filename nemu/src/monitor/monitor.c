@@ -119,7 +119,7 @@ void init_monitor(int argc, char *argv[]) {
   /* Perform ISA dependent initialization. */
   init_isa();
 
-  /* Load the image to memory. This will overwrite the built-in image. */
+  /* Load the image to memory. This will overwrite the built-in image. 运行时可以添加参数 将一个客户程序读入内存，覆盖刚才的内置客户程序*/
   long img_size = load_img();
 
   /* Initialize differential testing. */

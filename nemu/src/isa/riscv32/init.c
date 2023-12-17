@@ -18,6 +18,7 @@
 
 // this is not consistent with uint8_t
 // but it is ok since we do not access the array directly
+// nei zhi ke hu zhi ling
 static const uint32_t img [] = {
   0x00000297,  // auipc t0,0
   0x00028823,  // sb  zero,16(t0)
