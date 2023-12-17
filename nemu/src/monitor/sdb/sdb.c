@@ -79,7 +79,7 @@ static int cmd_si(char *args) {
       printf("-----------");
       return 1;
     }
-    num += (args[i] - '0') * pow(10,len - i);  
+    num += (args[i] - '0') * pow(10,len - i - 1);  
   }
   printf("%d\n", num);
 
