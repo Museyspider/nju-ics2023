@@ -54,6 +54,7 @@ static int cmd_q(char *args) {
 
 static int cmd_help(char *args);
 
+// 程序中存在哪些命令
 static struct {
   const char *name;
   const char *description;
@@ -111,6 +112,7 @@ void sdb_mainloop() {
 
     /* treat the remaining string as the arguments,
      * which may need further parsing
+     * + 1 是去掉空格
      */
     char *args = cmd + strlen(cmd) + 1;
     if (args >= str_end) {
@@ -125,7 +127,7 @@ void sdb_mainloop() {
     int i;
     for (i = 0; i < NR_CMD; i ++) {
       if (strcmp(cmd, cmd_table[i].name) == 0) {
-        if (cmd_table[i].handler(args) < 0) { return; }
+        if (cmd_table[i].handler(args) < 0) { return; }  // 命令q是直接return
         break;
       }
     }
