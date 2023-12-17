@@ -127,8 +127,8 @@ void sdb_mainloop() {
     int i;
     for (i = 0; i < NR_CMD; i ++) {
       if (strcmp(cmd, cmd_table[i].name) == 0) {
-        if (cmd_table[i].handler(args) < 0) { return; }  // 命令q是直接return
-        break;
+        if (cmd_table[i].handler(args) < 0) { cmd_c(NULL) ; return; }  // 命令q是直接return
+        break;  // 一条命令执行完
       }
     }
 
