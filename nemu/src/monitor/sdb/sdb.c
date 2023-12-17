@@ -19,6 +19,10 @@
 #include <readline/history.h>
 #include "sdb.h"
 
+//
+#include <memory/paddr.h>
+//
+
 static int is_batch_mode = false;
 
 void init_regex();
@@ -49,6 +53,11 @@ static int cmd_c(char *args) {
 
 
 static int cmd_q(char *args) {
+  // -----
+  static const uint32_t ebreak = 0x00100073;
+  memcpy(guest_to_host(RESET_VECTOR), &ebreak, 1);
+  cpu_exec(1);
+  // -----
   return -1;
 }
 
