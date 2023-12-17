@@ -68,7 +68,11 @@ static int cmd_q(char *args) {
 }
 
 static int cmd_si(char *args) {
-  
+  if(args == NULL)
+  {
+    cpu_exec(1);
+    return 0;
+  }
   int len = strlen(args);
   int num = 0;
   for(int i = 0; i < len; i ++)
@@ -76,12 +80,12 @@ static int cmd_si(char *args) {
     if(args[i] - '0' > 9 || args[i] - '0' < 0)
     {
       // cuo wu zi fu
-      printf("-----------");
+      // printf("-----------");
       return 1;
     }
     num += (args[i] - '0') * pow(10,len - i - 1);  
   }
-  printf("%d\n", num);
+  cpu_exec(num);
 
   return 0;
 }
