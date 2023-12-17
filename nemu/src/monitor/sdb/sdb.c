@@ -21,6 +21,8 @@
 
 //
 #include <memory/paddr.h>
+#include <string.h>
+#include <math.h>
 //
 
 static int is_batch_mode = false;
@@ -65,6 +67,48 @@ static int cmd_q(char *args) {
   return -1;
 }
 
+static int cmd_si(char *args) {
+  int len = strlen(args);
+  int num = 0;
+  for(int i = len; i > 0; i --)
+  {
+    if(args[i] - '0' > 9 || args[i] - '0' < 0)
+    {
+      // cuo wu zi fu
+      return 1;
+    }
+    num += (args[i] - '0') * pow(10,i);  
+  }
+  printf("%d\n", num);
+
+  return 0;
+}
+
+static int cmd_info(char *args) {
+  cpu_exec(-1);
+  return 0;
+}
+
+static int cmd_x(char *args) {
+  cpu_exec(-1);
+  return 0;
+}
+
+static int cmd_p(char *args) {
+  cpu_exec(-1);
+  return 0;
+}
+
+static int cmd_w(char *args) {
+  cpu_exec(-1);
+  return 0;
+}
+
+static int cmd_d(char *args) {
+  cpu_exec(-1);
+  return 0;
+}
+
 static int cmd_help(char *args);
 
 // 程序中存在哪些命令
@@ -78,7 +122,12 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
 
   /* TODO: Add more commands */
-
+  { "si", "Exit NEMU", cmd_si },
+  { "info", "Exit NEMU", cmd_info },
+  { "x", "Exit NEMU", cmd_x },
+  { "p", "Exit NEMU", cmd_p },
+  { "w", "Exit NEMU", cmd_w },
+  { "d", "Exit NEMU", cmd_d },
 };
 
 #define NR_CMD ARRLEN(cmd_table)
@@ -140,7 +189,7 @@ void sdb_mainloop() {
     int i;
     for (i = 0; i < NR_CMD; i ++) {
       if (strcmp(cmd, cmd_table[i].name) == 0) {
-        if (cmd_table[i].handler(args) < 0) { return; }  // 命令q是直接return
+        if (cmd_table[i].handler(args) < 0) { return; }  // 命令q是直接return  函数值小于0直接结束  
         break;  // 一条命令执行完
       }
     }
