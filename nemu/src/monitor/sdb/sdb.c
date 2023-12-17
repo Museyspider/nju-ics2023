@@ -68,7 +68,7 @@ static int cmd_q(char *args) {
 }
 
 static int cmd_si(char *args) {
-  printf("-----------");
+  
   int len = strlen(args);
   int num = 0;
   for(int i = len; i > 0; i --)
@@ -76,6 +76,7 @@ static int cmd_si(char *args) {
     if(args[i] - '0' > 9 || args[i] - '0' < 0)
     {
       // cuo wu zi fu
+      printf("-----------");
       return 1;
     }
     num += (args[i] - '0') * pow(10,i);  
