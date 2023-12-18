@@ -95,7 +95,6 @@ static uint32_t strtoHex(char *str)
   }
   uint32_t val = 0;
   sscanf(str, "0x%x", &val);
-  printf("val=%x\n",val);
   return val;
 }
 
@@ -137,7 +136,6 @@ static int cmd_x(char *args) {
   char *num = strtok(args, " ");
   if (num == NULL) { return 1; }
   int n = strtoval(num);
-  printf("n=%d\n", n);
   /* treat the remaining string as the arguments,
     * which may need further parsing
     * + 1 是去掉空格
@@ -148,9 +146,10 @@ static int cmd_x(char *args) {
     return 1;
   }
   uint32_t addr = strtoHex(expr);
-  printf("addr=%x\n", addr);
-  // guest_to_host();
-
+  for(int i = 0; i < n; i ++)
+  {
+    printf("%x=%d\n", addr, *guest_to_host(addr));
+  }
   return 0;
 }
 
