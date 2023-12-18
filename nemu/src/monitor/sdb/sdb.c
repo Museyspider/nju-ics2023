@@ -90,7 +90,7 @@ static uint32_t strtoHex(char *str)
   int len = strlen(str);
   if(len != 10)
   {
-    // argument falut
+    // argument fault
     return 1;
   }
   uint32_t val = 0;
@@ -147,6 +147,7 @@ static int cmd_x(char *args) {
   }
   uint32_t addr = strtoHex(expr);
 
+  // 查看0x100000处内存会segmentation fault
   for(int i = 0; i < n; i ++)
   {
     printf("%x=%x\n", addr + i, *guest_to_host(addr + i));
