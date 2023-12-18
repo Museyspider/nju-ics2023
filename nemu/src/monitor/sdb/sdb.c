@@ -146,8 +146,8 @@ static int cmd_x(char *args) {
     args = NULL;
     return 1;
   }
-  int addr = strtoHex(expr);
-  printf("addr=%d\n", addr);
+  uint32_t addr = strtoHex(expr);
+  printf("addr=%x\n", addr);
   // guest_to_host();
 
   return 0;
