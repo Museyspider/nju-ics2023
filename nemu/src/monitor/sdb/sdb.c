@@ -61,6 +61,7 @@ static int cmd_q(char *args) {
     return -1;
   }
   static const uint32_t ebreak = 0x00100073;
+  cpu.pc = 0x80000000;
   memcpy(guest_to_host(RESET_VECTOR), &ebreak, 4);
   cpu_exec(1);
   // -----
