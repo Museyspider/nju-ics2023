@@ -146,9 +146,10 @@ static int cmd_x(char *args) {
     return 1;
   }
   uint32_t addr = strtoHex(expr);
+
   for(int i = 0; i < n; i ++)
   {
-    printf("%x=%d\n", addr + i, *guest_to_host(addr + i));
+    printf("%x=%x\n", addr + i, *guest_to_host(addr + i));
   }
   return 0;
 }
