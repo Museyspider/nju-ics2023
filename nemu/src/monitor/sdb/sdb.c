@@ -67,24 +67,44 @@ static int cmd_q(char *args) {
   return -1;
 }
 
+static int strtoval(char *str)
+{
+  int len = strlen(str);
+  int num = 0;
+  for(int i = 0; i < len; i ++)
+  {
+    if(str[i] - '0' > 9 || str[i] - '0' < 0)
+    {
+      // cuo wu zi fu
+      // printf("-----------");
+      return -1;
+    }
+    num += (str[i] - '0') * pow(10,len - i - 1);  
+  }
+  return num;
+} 
+
+static uint32_t strtoHex(char *str)
+{
+  int len = strlen(str);
+  if(len != 10)
+  {
+    // argument falut
+    return 1;
+  }
+  uint32_t val = 0;
+  sscanf(str, "0x%x", &val);
+  printf("val=%x\n",val);
+  return val;
+}
+
 static int cmd_si(char *args) {
   if(args == NULL)
   {
     cpu_exec(1);
     return 0;
   }
-  int len = strlen(args);
-  int num = 0;
-  for(int i = 0; i < len; i ++)
-  {
-    if(args[i] - '0' > 9 || args[i] - '0' < 0)
-    {
-      // cuo wu zi fu
-      // printf("-----------");
-      return 1;
-    }
-    num += (args[i] - '0') * pow(10,len - i - 1);  
-  }
+  int num = strtoval(args);
   cpu_exec(num);
 
   return 0;
@@ -108,8 +128,28 @@ static int cmd_info(char *args) {
   return 0;
 }
 
+
 static int cmd_x(char *args) {
-  cpu_exec(-1);
+  char *str_end = args + strlen(args);
+
+  /* extract the first token as the command */
+  char *num = strtok(args, " ");
+  if (num == NULL) { return 1; }
+  int n = strtoval(num);
+  printf("n=%d\n", n);
+  /* treat the remaining string as the arguments,
+    * which may need further parsing
+    * + 1 是去掉空格
+  */
+  char *expr = args + strlen(args) + 1;
+  if (args >= str_end) {
+    args = NULL;
+    return 1;
+  }
+  int addr = strtoHex(expr);
+  printf("addr=%d\n", addr);
+  // guest_to_host();
+
   return 0;
 }
 
