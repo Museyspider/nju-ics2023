@@ -68,6 +68,7 @@ static int cmd_q(char *args) {
   return -1;
 }
 
+// 字符串转成十进制
 static int strtoval(char *str)
 {
   int len = strlen(str);
@@ -85,6 +86,7 @@ static int strtoval(char *str)
   return num;
 } 
 
+// 字符串转成十六进制
 static uint32_t strtoHex(char *str)
 {
   int len = strlen(str);
@@ -98,6 +100,7 @@ static uint32_t strtoHex(char *str)
   return val;
 }
 
+// 单步执行
 static int cmd_si(char *args) {
   if(args == NULL)
   {
@@ -110,6 +113,7 @@ static int cmd_si(char *args) {
   return 0;
 }
 
+// 寄存器信息
 static int cmd_info(char *args) {
   int len = strlen(args);
   if(len > 1)
@@ -128,7 +132,7 @@ static int cmd_info(char *args) {
   return 0;
 }
 
-
+// 扫描内存
 static int cmd_x(char *args) {
   char *str_end = args + strlen(args);
 
@@ -155,8 +159,11 @@ static int cmd_x(char *args) {
   return 0;
 }
 
+// 表达式求值
 static int cmd_p(char *args) {
-  cpu_exec(-1);
+  bool success = true;
+  expr(args, &success);
+
   return 0;
 }
 

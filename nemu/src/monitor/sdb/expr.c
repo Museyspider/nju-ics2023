@@ -21,7 +21,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ,
+  TK_NOTYPE = 256, TK_EQ, TK_NUM, TK_PLUS, TK_MINUS, TK_MUL, TK_DIV, TK_L, TK_R 
 
   /* TODO: Add more token types */
 
@@ -37,8 +37,17 @@ static struct rule {
    */
 
   {" +", TK_NOTYPE},    // spaces
-  {"\\+", '+'},         // plus
+  {"\\+", TK_PLUS},         // plus
   {"==", TK_EQ},        // equal
+
+  // -----------
+  {"\\-", TK_MINUS},
+  {"\\*", TK_MUL},
+  {"\\/", TK_DIV},
+  {"\\d+",  TK_NUM},
+  {"\\(", TK_L},
+  {"\\)", TK_R},
+  // -----------
 };
 
 #define NR_REGEX ARRLEN(rules)
@@ -70,6 +79,7 @@ typedef struct token {
 static Token tokens[32] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 
+// 识别token
 static bool make_token(char *e) {
   int position = 0;
   int i;
@@ -80,6 +90,8 @@ static bool make_token(char *e) {
   while (e[position] != '\0') {
     /* Try all rules one by one. */
     for (i = 0; i < NR_REGEX; i ++) {
+
+      // 这里它是确定了 一个要匹配的子串
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
@@ -95,6 +107,51 @@ static bool make_token(char *e) {
          */
 
         switch (rules[i].token_type) {
+
+          // -------------
+          case TK_NOTYPE: 
+            break;
+
+          case TK_NUM: 
+            for(int i = 0; i < substr_len; i ++)
+            {
+              tokens[nr_token].str[i] = *(substr_start + i);
+            }
+            tokens[nr_token].type = rules[i].token_type;
+            nr_token++;
+            break;
+
+          case TK_PLUS: 
+            tokens[nr_token].str[i] = *(substr_start);
+            tokens[nr_token].type = rules[i].token_type;
+            nr_token++;
+            break;
+
+          case TK_MUL: 
+            tokens[nr_token].str[i] = *(substr_start);
+            tokens[nr_token].type = rules[i].token_type;
+            nr_token++;
+            break;
+          
+          case TK_DIV: 
+            tokens[nr_token].str[i] = *(substr_start);
+            tokens[nr_token].type = rules[i].token_type;
+            nr_token++;
+            break;
+
+          case TK_R: 
+            tokens[nr_token].str[i] = *(substr_start);
+            tokens[nr_token].type = rules[i].token_type;
+            nr_token++;
+            break;
+
+          case TK_L: 
+            tokens[nr_token].str[i] = *(substr_start);
+            tokens[nr_token].type = rules[i].token_type;
+            nr_token++;
+            break;
+
+          // -------------
           default: TODO();
         }
 
@@ -116,6 +173,10 @@ word_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
     return 0;
+  }
+  for(int i = 0; i < nr_token; i ++)
+  {
+    printf("%s\n", tokens[i].str);
   }
 
   /* TODO: Insert codes to evaluate the expression. */
