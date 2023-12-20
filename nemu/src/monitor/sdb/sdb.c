@@ -69,7 +69,7 @@ static int cmd_q(char *args) {
 }
 
 // 字符串转成十进制
-static int strtoval(char *str)
+int strtoval(char *str)
 {
   int len = strlen(str);
   int num = 0;

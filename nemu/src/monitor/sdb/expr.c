@@ -174,19 +174,126 @@ static bool make_token(char *e) {
   return true;
 }
 
+static bool check_parentheses(int p, int q)
+{
+  if(tokens[p].type != TK_L)
+  {
+    return false;
+  }
+  int L = 1;
+  // int error = 0;
+  int count = 0;  // L 为0的次数只能是1次
+  for(int i = p + 1; i <= q; i ++)
+  {
+    if(tokens[p].type==TK_L)
+    {
+      L ++;
+    }
+    if(tokens[p].type==TK_R)
+    {
+      L --;
+    }
+    if(L < 0)
+    {
+      // error = 1;
+      printf("表达式错误！");
+      return false;
+    }
+    if(L == 0)
+    {
+      count++;
+    }
+  }
+  if(L == 0 && count == 1)
+  {
+    return true;
+  }
+  return false;
+}
+
+// 没有进行异常表达式的处理
+// static int optPosition(int p, int q)
+// {
+//   int level = 0;
+//   int pos = p;
+//   int L = 0;
+//   for(int i = p; i <= q; i ++)
+//   {
+//     if(tokens[i].type == TK_L)
+//     {
+//       L ++;
+//     }
+//     if(tokens[i].type == TK_R)
+//     {
+//       L --;
+//     }
+//     if(L == 0 && (tokens[i].type == TK_DIV || tokens[i].type == TK_MUL) && level == 0)
+//     {
+//       pos = i;
+//     }
+//     if(L == 0 && (tokens[i].type == TK_PLUS || tokens[i].type == TK_MINUS))
+//     {
+//       level ++;
+//       pos = i;
+//     }
+//   }
+//   return pos;
+// }
+
+
+// word_t eval(int p, int q)
+// {
+//   if (p > q) 
+//   {
+//     // Bad expression 
+//     return 0;  // 是不是返回0
+//   }
+//   else if (p == q) 
+//   {
+//     /* Single token.
+//      * For now this token should be a number.
+//      * Return the value of the number.
+//      */
+//     return strtoval(tokens[p].str);
+//   }
+//   else if (check_parentheses(p, q) == true) {
+//     /* The expression is surrounded by a matched pair of parentheses.
+//      * If that is the case, just throw away the parentheses.
+//      */
+//     return eval(p + 1, q - 1);
+//   }
+//   else {
+//     int op = ;
+//     int val1 = eval(p, op - 1);
+//     int val2 = eval(op + 1, q);
+
+//     switch (tokens[op].type) {
+//       case TK_PLUS: return val1 + val2;
+//       case TK_MINUS: return val1 - val2;
+//       case TK_MUL: return val1 * val2;
+//       case TK_DIV: return val1 / val2;
+//       default: assert(0);
+//     }
+//   }
+// }
+
 
 word_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
     return 0;
   }
-  for(int i = 0; i < nr_token; i ++)
-  {
-    printf("%s\n", tokens[i].str);
-  }
+  // for(int i = 0; i < nr_token; i ++)
+  // {
+  //   printf("%s\n", tokens[i].str);
+  // }
+
+  printf("%d\n", check_parentheses(0, nr_token));
+  // optPosition(0, nr_token);
 
   /* TODO: Insert codes to evaluate the expression. */
   // TODO();
+  // eval(0,nr_token);
 
   return 0;
 }
