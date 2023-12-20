@@ -185,11 +185,11 @@ static bool check_parentheses(int p, int q)
   int count = 0;  // L 为0的次数只能是1次
   for(int i = p + 1; i <= q; i ++)
   {
-    if(tokens[p].type==TK_L)
+    if(tokens[i].type==TK_L)
     {
       L ++;
     }
-    if(tokens[p].type==TK_R)
+    if(tokens[i].type==TK_R)
     {
       L --;
     }
