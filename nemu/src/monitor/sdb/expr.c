@@ -188,10 +188,12 @@ static bool check_parentheses(int p, int q)
     if(tokens[p].type==TK_L)
     {
       L ++;
+      continue;
     }
     if(tokens[p].type==TK_R)
     {
       L --;
+      continue;
     }
     if(L < 0)
     {
