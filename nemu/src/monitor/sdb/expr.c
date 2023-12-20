@@ -208,6 +208,7 @@ static bool check_parentheses(int p, int q)
   {
     return true;
   }
+  printf("%d\n", count);
   return false;
 }
 
