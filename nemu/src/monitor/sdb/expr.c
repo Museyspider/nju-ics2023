@@ -127,6 +127,12 @@ static bool make_token(char *e) {
             nr_token++;
             break;
 
+          case TK_MINUS: 
+            tokens[nr_token].str[i] = *(substr_start);
+            tokens[nr_token].type = rules[i].token_type;
+            nr_token++;
+            break;
+
           case TK_MUL: 
             tokens[nr_token].str[i] = *(substr_start);
             tokens[nr_token].type = rules[i].token_type;
