@@ -122,43 +122,43 @@ static bool make_token(char *e) {
             break;
 
           case TK_PLUS: 
-            tokens[nr_token].str[i] = *(substr_start);
+            tokens[nr_token].str[0] = *(substr_start);
             tokens[nr_token].type = rules[i].token_type;
             nr_token++;
             break;
 
           case TK_MINUS: 
-            tokens[nr_token].str[i] = *(substr_start);
+            tokens[nr_token].str[0] = *(substr_start);
             tokens[nr_token].type = rules[i].token_type;
             nr_token++;
             break;
 
           case TK_MUL: 
-            tokens[nr_token].str[i] = *(substr_start);
+            tokens[nr_token].str[0] = *(substr_start);
             tokens[nr_token].type = rules[i].token_type;
             nr_token++;
             break;
           
           case TK_DIV: 
-            tokens[nr_token].str[i] = *(substr_start);
+            tokens[nr_token].str[0] = *(substr_start);
             tokens[nr_token].type = rules[i].token_type;
             nr_token++;
             break;
 
           case TK_R: 
-            tokens[nr_token].str[i] = *(substr_start);
+            tokens[nr_token].str[0] = *(substr_start);
             tokens[nr_token].type = rules[i].token_type;
             nr_token++;
             break;
 
           case TK_L: 
-            tokens[nr_token].str[i] = *(substr_start);
+            tokens[nr_token].str[0] = *(substr_start);
             tokens[nr_token].type = rules[i].token_type;
             nr_token++;
             break;
 
           // -------------
-          default: TODO();
+          default: break;
         }
 
         break;
