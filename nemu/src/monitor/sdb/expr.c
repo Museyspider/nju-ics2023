@@ -291,7 +291,7 @@ word_t expr(char *e, bool *success) {
   // }
 
   // printf("%d\n", check_parentheses(0, nr_token - 1));
-  printf("optPosition=%d\n", optPosition(0, nr_token));
+  printf("optPosition=%d\n", optPosition(0, nr_token - 1));
 
   /* TODO: Insert codes to evaluate the expression. */
   // TODO();
