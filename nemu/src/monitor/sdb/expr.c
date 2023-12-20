@@ -185,6 +185,7 @@ static bool check_parentheses(int p, int q)
   int count = 0;  // L 为0的次数只能是1次
   for(int i = p + 1; i <= q; i ++)
   {
+    printf("L=%d\n", L);
     if(tokens[i].type==TK_L)
     {
       L ++;
@@ -208,7 +209,7 @@ static bool check_parentheses(int p, int q)
   {
     return true;
   }
-  printf("%d\n", count);
+  printf("count=%d\n", count);
   return false;
 }
 
