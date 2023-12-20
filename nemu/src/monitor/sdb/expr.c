@@ -44,7 +44,7 @@ static struct rule {
   {"\\-", TK_MINUS},
   {"\\*", TK_MUL},
   {"\\/", TK_DIV},
-  {"\\d+",  TK_NUM},
+  {"[0-9]+",  TK_NUM},
   {"\\(", TK_L},
   {"\\)", TK_R},
   // -----------
