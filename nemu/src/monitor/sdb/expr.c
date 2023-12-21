@@ -27,7 +27,7 @@ extern int strtoval(char *);
 // --------- 
 
 enum {
-  TK_NOTYPE = 256, TK_EQ, TK_NUM, TK_PLUS, TK_MINUS, TK_MUL, TK_DIV, TK_L, TK_R 
+  TK_NOTYPE = 256, TK_EQ, TK_NUM, TK_PLUS, TK_MINUS, TK_MUL, TK_DIV, TK_L, TK_R, DEREF, TK_AND, TK_UNEQ
 
   /* TODO: Add more token types */
 
@@ -53,6 +53,8 @@ static struct rule {
   {"[0-9]+",  TK_NUM},
   {"\\(", TK_L},
   {"\\)", TK_R},
+  {"&&", TK_AND},
+  {"!=", TK_UNEQ},
   // -----------
 };
 
@@ -159,6 +161,27 @@ static bool make_token(char *e) {
 
           case TK_L: 
             tokens[nr_token].str[0] = *(substr_start);
+            tokens[nr_token].type = rules[i].token_type;
+            nr_token++;
+            break;
+          
+          case TK_EQ: 
+            tokens[nr_token].str[0] = *(substr_start);
+            tokens[nr_token].str[1] = *(substr_start + 1);
+            tokens[nr_token].type = rules[i].token_type;
+            nr_token++;
+            break;
+          
+          case TK_UNEQ: 
+            tokens[nr_token].str[0] = *(substr_start);
+            tokens[nr_token].str[1] = *(substr_start + 1);
+            tokens[nr_token].type = rules[i].token_type;
+            nr_token++;
+            break;
+          
+          case TK_AND: 
+            tokens[nr_token].str[0] = *(substr_start);
+            tokens[nr_token].str[1] = *(substr_start + 1);
             tokens[nr_token].type = rules[i].token_type;
             nr_token++;
             break;
@@ -301,6 +324,21 @@ word_t expr(char *e, bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
   // TODO();
+  for (int i = 0; i < nr_token; i ++) 
+  {
+    if (tokens[i].str[0] == '*' && (i == 0 || tokens[i - 1].type == TK_PLUS
+         || tokens[i - 1].type == TK_MINUS || tokens[i - 1].type == TK_MUL || tokens[i - 1].type == TK_DIV
+         || tokens[i - 1].type == DEREF ) ) 
+    {
+      tokens[i].type = DEREF;
+    }
+    else
+    {
+      tokens[i].type = TK_MUL;
+    }
+  }
+
+
   printf("expr=%d\n", eval(0, nr_token - 1));
 
   return 0;
