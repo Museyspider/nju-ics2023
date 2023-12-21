@@ -191,7 +191,7 @@ static bool check_parentheses(int p, int q)
   int count = 0;  // L 为0的次数只能是1次
   for(int i = p + 1; i <= q; i ++)
   {
-    printf("L=%d\n", L);
+    // printf("L=%d\n", L);
     if(tokens[i].type==TK_L)
     {
       L ++;
@@ -215,7 +215,7 @@ static bool check_parentheses(int p, int q)
   {
     return true;
   }
-  printf("count=%d\n", count);
+  // printf("count=%d\n", count);
   return false;
 }
 
@@ -262,7 +262,7 @@ word_t eval(int p, int q)
      * For now this token should be a number.
      * Return the value of the number.
      */
-    return (word_t)strtoval(tokens[p].str);
+    return strtoval(tokens[p].str);
   }
   else if (check_parentheses(p, q) == true) {
     /* The expression is surrounded by a matched pair of parentheses.
@@ -301,7 +301,7 @@ word_t expr(char *e, bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
   // TODO();
-  printf("expr=%d\n", eval(0,nr_token));
-
+  // printf("expr=%d\n", eval(0,nr_token));
+  eval(0, nr_token - 1);
   return 0;
 }
