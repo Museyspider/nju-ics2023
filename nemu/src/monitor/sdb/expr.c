@@ -20,6 +20,12 @@
  */
 #include <regex.h>
 
+// ---------
+#include <stdbool.h>
+
+extern int strtoval(char *);
+// --------- 
+
 enum {
   TK_NOTYPE = 256, TK_EQ, TK_NUM, TK_PLUS, TK_MINUS, TK_MUL, TK_DIV, TK_L, TK_R 
 
@@ -174,44 +180,44 @@ static bool make_token(char *e) {
   return true;
 }
 
-// static bool check_parentheses(int p, int q)
-// {
-//   if(tokens[p].type != TK_L)
-//   {
-//     return false;
-//   }
-//   int L = 1;
-//   // int error = 0;
-//   int count = 0;  // L 为0的次数只能是1次
-//   for(int i = p + 1; i <= q; i ++)
-//   {
-//     printf("L=%d\n", L);
-//     if(tokens[i].type==TK_L)
-//     {
-//       L ++;
-//     }
-//     if(tokens[i].type==TK_R)
-//     {
-//       L --;
-//     }
-//     if(L < 0)
-//     {
-//       // error = 1;
-//       printf("表达式错误！");
-//       return false;
-//     }
-//     if(L == 0)
-//     {
-//       count++;
-//     }
-//   }
-//   if(L == 0 && count == 1)
-//   {
-//     return true;
-//   }
-//   printf("count=%d\n", count);
-//   return false;
-// }
+static bool check_parentheses(int p, int q)
+{
+  if(tokens[p].type != TK_L)
+  {
+    return false;
+  }
+  int L = 1;
+  // int error = 0;
+  int count = 0;  // L 为0的次数只能是1次
+  for(int i = p + 1; i <= q; i ++)
+  {
+    printf("L=%d\n", L);
+    if(tokens[i].type==TK_L)
+    {
+      L ++;
+    }
+    if(tokens[i].type==TK_R)
+    {
+      L --;
+    }
+    if(L < 0)
+    {
+      // error = 1;
+      printf("表达式错误！");
+      return false;
+    }
+    if(L == 0)
+    {
+      count++;
+    }
+  }
+  if(L == 0 && count == 1)
+  {
+    return true;
+  }
+  printf("count=%d\n", count);
+  return false;
+}
 
 // 没有进行异常表达式的处理
 static int optPosition(int p, int q)
@@ -243,41 +249,41 @@ static int optPosition(int p, int q)
 }
 
 
-// word_t eval(int p, int q)
-// {
-//   if (p > q) 
-//   {
-//     // Bad expression 
-//     return 0;  // 是不是返回0
-//   }
-//   else if (p == q) 
-//   {
-//     /* Single token.
-//      * For now this token should be a number.
-//      * Return the value of the number.
-//      */
-//     return strtoval(tokens[p].str);
-//   }
-//   else if (check_parentheses(p, q) == true) {
-//     /* The expression is surrounded by a matched pair of parentheses.
-//      * If that is the case, just throw away the parentheses.
-//      */
-//     return eval(p + 1, q - 1);
-//   }
-//   else {
-//     int op = ;
-//     int val1 = eval(p, op - 1);
-//     int val2 = eval(op + 1, q);
+word_t eval(int p, int q)
+{
+  if (p > q) 
+  {
+    // Bad expression 
+    return 0;  // 是不是返回0
+  }
+  else if (p == q) 
+  {
+    /* Single token.
+     * For now this token should be a number.
+     * Return the value of the number.
+     */
+    return (word_t)strtoval(tokens[p].str);
+  }
+  else if (check_parentheses(p, q) == true) {
+    /* The expression is surrounded by a matched pair of parentheses.
+     * If that is the case, just throw away the parentheses.
+     */
+    return eval(p + 1, q - 1);
+  }
+  else {
+    int op = optPosition(p, q);
+    int val1 = eval(p, op - 1);
+    int val2 = eval(op + 1, q);
 
-//     switch (tokens[op].type) {
-//       case TK_PLUS: return val1 + val2;
-//       case TK_MINUS: return val1 - val2;
-//       case TK_MUL: return val1 * val2;
-//       case TK_DIV: return val1 / val2;
-//       default: assert(0);
-//     }
-//   }
-// }
+    switch (tokens[op].type) {
+      case TK_PLUS: return val1 + val2;
+      case TK_MINUS: return val1 - val2;
+      case TK_MUL: return val1 * val2;
+      case TK_DIV: return val1 / val2;
+      default: assert(0);
+    }
+  }
+}
 
 
 word_t expr(char *e, bool *success) {
@@ -291,11 +297,11 @@ word_t expr(char *e, bool *success) {
   // }
 
   // printf("%d\n", check_parentheses(0, nr_token - 1));
-  printf("optPosition=%d\n", optPosition(0, nr_token - 1));
+  // printf("optPosition=%d\n", optPosition(0, nr_token - 1));
 
   /* TODO: Insert codes to evaluate the expression. */
   // TODO();
-  // eval(0,nr_token);
+  printf("expr=%d\n", eval(0,nr_token));
 
   return 0;
 }
