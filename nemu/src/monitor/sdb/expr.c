@@ -27,7 +27,8 @@ extern int strtoval(char *);
 // --------- 
 
 enum {
-  TK_NOTYPE = 256, TK_EQ, TK_NUM, TK_PLUS, TK_MINUS, TK_MUL, TK_DIV, TK_L, TK_R, DEREF, TK_AND, TK_UNEQ
+  TK_NOTYPE = 256, TK_EQ, TK_NUM, TK_PLUS, TK_MINUS, TK_MUL, TK_DIV, TK_L, TK_R, DEREF, TK_AND, TK_UNEQ,
+  TK_HEX, TK_REG, 
 
   /* TODO: Add more token types */
 

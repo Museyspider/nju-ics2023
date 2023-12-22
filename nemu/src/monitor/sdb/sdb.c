@@ -23,6 +23,7 @@
 #include <memory/paddr.h>
 #include <string.h>
 #include <math.h>
+extern word_t isa_reg_str2val(const char *, bool *);
 //
 
 static int is_batch_mode = false;
@@ -168,7 +169,8 @@ static int cmd_p(char *args) {
 }
 
 static int cmd_w(char *args) {
-  cpu_exec(-1);
+  bool success = true;
+  printf("%d\n", isa_reg_str2val(args, &success));
   return 0;
 }
 

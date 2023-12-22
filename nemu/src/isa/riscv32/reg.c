@@ -34,6 +34,18 @@ void isa_reg_display() {
   printf("pc=0x%x     %d\n", cpu.pc, cpu.pc);
 }
 
+// 返回名为s的寄存器的值
 word_t isa_reg_str2val(const char *s, bool *success) {
+  for(int i = 0; i < 32; i ++)
+  {
+    if(strcmp(regs[i], s) == 0)
+    {
+      *success = true;
+      return cpu.gpr[i];
+    }
+  }
+  success = false;
+  // 未匹配到寄存qi
+  assert(0);
   return 0;
 }
