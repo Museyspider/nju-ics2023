@@ -360,10 +360,6 @@ word_t expr(char *e, bool *success)
 
   /* TODO: Insert codes to evaluate the expression. */
   // TODO();
-  for (int i = 0; i < nr_token; i++)
-  {
-    printf("%s ---- %d\n", tokens[i].str, tokens[i].type);
-  }
 
   for (int i = 0; i < nr_token; i++)
   {
