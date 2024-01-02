@@ -367,8 +367,9 @@ word_t expr(char *e, bool *success)
 
   for (int i = 0; i < nr_token; i++)
   {
-    if (tokens[i].type == TK_MUL &&
-        (i == 0 || tokens[i - 1].type == TK_PLUS || tokens[i - 1].type == TK_MINUS || tokens[i - 1].type == TK_MUL || tokens[i - 1].type == TK_DIV || tokens[i - 1].type == DEREF))
+    // *号前是数字 则该*是乘号 ,     NUM , reg,  hex
+    // 否则则是解引用
+    if ((tokens[i].type == TK_MUL && tokens[i - 1].type != TK_NUM && tokens[i - 1].type != TK_HEX && tokens[i - 1].type != TK_REG) || (i == 0 && tokens[i].type == TK_MUL))
     {
       tokens[i].type = DEREF;
     }
