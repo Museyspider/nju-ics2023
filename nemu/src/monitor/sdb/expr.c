@@ -362,6 +362,11 @@ word_t expr(char *e, bool *success)
   // TODO();
   for (int i = 0; i < nr_token; i++)
   {
+    printf("%s ---- %d\n", tokens[i].str, tokens[i].type);
+  }
+
+  for (int i = 0; i < nr_token; i++)
+  {
     if (tokens[i].str[0] == '*' && (i == 0 || tokens[i - 1].type == TK_PLUS || tokens[i - 1].type == TK_MINUS || tokens[i - 1].type == TK_MUL || tokens[i - 1].type == TK_DIV || tokens[i - 1].type == DEREF))
     {
       tokens[i].type = DEREF;
