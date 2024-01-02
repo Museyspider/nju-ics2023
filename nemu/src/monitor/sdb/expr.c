@@ -210,9 +210,11 @@ static bool make_token(char *e)
           nr_token++;
           break;
 
-        // -------------
-        default:
-          break;
+          // case
+
+          //     // -------------
+          //     default:
+          //   break;
         }
 
         break;
@@ -369,8 +371,12 @@ word_t expr(char *e, bool *success)
       tokens[i].type = TK_MUL;
     }
   }
+  for (int i = 0; i < nr_token; i++)
+  {
+    printf("%s\n", tokens[i].str);
+  }
 
-  printf("expr=%d\n", eval(0, nr_token - 1));
+  // printf("expr=%d\n", eval(0, nr_token - 1));
 
   return 0;
 }
