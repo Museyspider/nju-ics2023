@@ -212,7 +212,7 @@ static int cmd_d(char *args)
     print_head_free_();
     return 0;
   }
-  Log("删除失败！");
+  Log("删除失败！下标不在head链中");
   print_head_free_();
   return 1;
 }
