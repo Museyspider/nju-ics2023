@@ -100,6 +100,8 @@ int watchpoint_val()
       cur->val = *guest_to_host(cur->expr_addr);
       return 1; // 返回1 说明值发生了改变 程序暂停
     }
+    printf("in\n");
   }
+  printf("out\n");
   return 0;
 }
