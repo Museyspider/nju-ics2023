@@ -202,6 +202,7 @@ static int cmd_w(char *args)
 
 static int cmd_d(char *args)
 {
+  print_head_free_();
   int num = strtoval(args);
   int res = del_watchpoint(num);
   if (res == 0)
