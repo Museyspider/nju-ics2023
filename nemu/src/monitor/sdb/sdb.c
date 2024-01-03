@@ -204,10 +204,12 @@ static int cmd_d(char *args)
 {
   print_head_free_();
   int num = strtoval(args);
+  printf("%d\n", num);
   int res = del_watchpoint(num);
   if (res == 0)
   {
     Log("删除成功！");
+    print_head_free_();
     return 0;
   }
   Log("删除失败！");
