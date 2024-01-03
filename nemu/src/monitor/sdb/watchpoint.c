@@ -17,6 +17,7 @@
 
 // ------------
 #include <watchpoint.h>
+#include <memory/paddr.h>
 // ------------
 
 // 本文件的一个全局变量 , 每次使用该变量,是在上一次使用的基础上进行的
@@ -92,11 +93,11 @@ int watchpoint_val()
   WP *cur = head;
   while (cur != NULL)
   {
-    printf("cur->expr_addr=%x\n", cur->expr_addr);
-    printf("cur->expr_addr=%d\n", *(uint32_t *)(uint64_t)cur->expr_addr);
-    if (cur->val != *((uint32_t *)(uint64_t)cur->expr_addr))
+    // printf("cur->expr_addr=%x\n", cur->expr_addr);
+    // printf("cur->expr_addr=%d\n", *guest_to_host(cur->expr_addr));
+    if (cur->val != *guest_to_host(cur->expr_addr))
     {
-      cur->val = *((uint32_t *)(uint64_t)cur->expr_addr);
+      cur->val = *guest_to_host(cur->expr_addr);
       return 1; // 返回1 说明值发生了改变 程序暂停
     }
   }
