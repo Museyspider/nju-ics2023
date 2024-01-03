@@ -128,6 +128,7 @@ int del_watchpoint(int num)
       cur_f = c->next;
       return 0;
     }
+    cur_h = cur_h->next;
   }
   return 0; // 删除成功
 }
