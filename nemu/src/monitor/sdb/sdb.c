@@ -190,13 +190,13 @@ static int cmd_w(char *args)
 {
   // 添加一个监视点 , 并将字符串表达式记录在监视点信息中
   WP *cur = new_wp();
-  bool success = false;
+  // bool success = false;
   // cur->expr_addr = expr(args, &success);
   cur->expr_addr = strtoHex(args);
   cur->val = *guest_to_host(cur->expr_addr);
   printf("val=%x\n", cur->val);
-  cpu_exec(-1);
-  printf("%d\n", success);
+  // cpu_exec(-1);
+  // printf("%d\n", success);
   return 0;
 }
 
