@@ -111,21 +111,22 @@ int del_watchpoint(int num)
 {
   WP *cur_h = head;
   WP *cur_f = free_;
-  WP *cur = NULL;
-  if (cur_h->NO == num)
+  if (head->NO == num)
   {
-    cur_h->next = cur_f;
-    cur_f = cur_h;
+    WP *t = head->next;
+    head->next = free_;
+    free_ = head;
+    head = t;
     return 0;
   }
   while (cur_h->next != NULL)
   {
     if (cur_h->next->NO == num)
     {
-      WP *c = cur->next;
+      WP *c = cur_h->next;
       cur_h->next = cur_h->next->next;
       c->next = cur_f;
-      cur_f = c->next;
+      cur_f = c;
       return 0;
     }
     cur_h = cur_h->next;
