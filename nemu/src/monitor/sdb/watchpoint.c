@@ -15,19 +15,9 @@
 
 #include "sdb.h"
 
-#define NR_WP 32
-
-typedef struct watchpoint
-{
-  int NO;
-  struct watchpoint *next;
-
-  /* TODO: Add more members if necessary */
-
-} WP;
-
-WP *new_wp();
-void free_wp(WP *wp);
+// ------------
+#include <watchpoint.h>
+// ------------
 
 // 本文件的一个全局变量 , 每次使用该变量,是在上一次使用的基础上进行的
 static WP wp_pool[NR_WP] = {};
@@ -93,4 +83,20 @@ void free_wp(WP *wp)
   }
   wp->next = free_;
   free_ = wp;
+}
+
+// 执行一条指令后 watchpoint的值是否改变
+// 思考 执行一条指令会使得两个watchpoint的值发生改变吗
+int watchpoint_val()
+{
+  WP *cur = head;
+  while (cur != NULL)
+  {
+    if (cur->val != *((uint32_t *)(uint64_t)cur->expr_addr))
+    {
+      cur->val = *((uint32_t *)(uint64_t)cur->expr_addr);
+      return 1; // 返回1 说明值发生了改变 程序暂停
+    }
+  }
+  return 0;
 }
