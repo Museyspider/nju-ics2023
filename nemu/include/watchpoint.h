@@ -27,5 +27,6 @@ void free_wp(WP *wp); // 删除一个监视点
 int watchpoint_val(); // 判断所有监视点的值是否发生变化
 int del_watchpoint(int num);
 void print_head_free_();
+void print_watchpoint();
 
 #endif

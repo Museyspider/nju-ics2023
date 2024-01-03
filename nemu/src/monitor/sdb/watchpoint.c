@@ -133,6 +133,17 @@ int del_watchpoint(int num)
   return 1; // 删除失败，head中没有该下标
 }
 
+void print_watchpoint()
+{
+  WP *cur = head;
+  printf("No\t\taddr\t\tval\t\twhat\n");
+  while (cur != NULL)
+  {
+    printf("%d\t\t0x%x\t\t%d\t\t \n", cur->NO, cur->expr_addr, cur->val);
+    cur = cur->next;
+  }
+}
+
 void print_head_free_()
 {
   WP *cur_h = head;

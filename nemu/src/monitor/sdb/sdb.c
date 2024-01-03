@@ -137,6 +137,7 @@ static int cmd_info(char *args)
   }
   if (args[0] == 'w')
   {
+    print_watchpoint();
   }
   return 0;
 }
