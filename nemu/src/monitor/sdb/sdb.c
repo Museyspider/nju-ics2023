@@ -194,7 +194,7 @@ static int cmd_w(char *args)
   // cur->expr_addr = expr(args, &success);
   cur->expr_addr = strtoHex(args);
   cur->val = *guest_to_host(cur->expr_addr);
-  printf("val=%d\n", cur->val);
+  printf("val=%x\n", cur->val);
   cpu_exec(-1);
   printf("%d\n", success);
   return 0;
