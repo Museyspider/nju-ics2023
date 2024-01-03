@@ -54,7 +54,6 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc)
   // 程序每执行一条指令就 扫描一次监视点
   // 扫描所有的监视点  并对监视点相应的表达式求值 若值发生了变化 触发监视点 程序停下来 将nemu_state.state变量设置为NEMU_STOP 打印提示触发监视点 返回sdb_mainloop()
   int c = watchpoint_val();
-  printf("c=%d\n", c);
   if (c == 1)
   {
     // 值发生了改变

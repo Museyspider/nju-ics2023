@@ -102,8 +102,6 @@ int watchpoint_val()
       return 1; // 返回1 说明值发生了改变 程序暂停
     }
     cur = cur->next;
-    printf("in\n");
   }
-  printf("out\n");
   return 0;
 }
