@@ -92,6 +92,7 @@ int watchpoint_val()
   WP *cur = head;
   while (cur != NULL)
   {
+    printf("cur->expr_addr=%d\n", cur->expr_addr);
     if (cur->val != *((uint32_t *)(uint64_t)cur->expr_addr))
     {
       cur->val = *((uint32_t *)(uint64_t)cur->expr_addr);
