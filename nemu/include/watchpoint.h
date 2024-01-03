@@ -25,5 +25,6 @@ typedef struct watchpoint
 WP *new_wp();         // 添加一个监视点
 void free_wp(WP *wp); // 删除一个监视点
 int watchpoint_val(); // 判断所有监视点的值是否发生变化
+int del_watchpoint(int num);
 
 #endif

@@ -105,3 +105,29 @@ int watchpoint_val()
   }
   return 0;
 }
+
+// 删除监视点，只是将其从head 转到 free 节点中的值没做改变  用的时候要小心
+int del_watchpoint(int num)
+{
+  WP *cur_h = head;
+  WP *cur_f = free_;
+  WP *cur = NULL;
+  if (cur_h->NO == num)
+  {
+    cur_h->next = cur_f;
+    cur_f = cur_h;
+    return 0;
+  }
+  while (cur_h->next != NULL)
+  {
+    if (cur_h->next->NO == num)
+    {
+      WP *c = cur->next;
+      cur_h->next = cur_h->next->next;
+      c->next = cur_f;
+      cur_f = c->next;
+      return 0;
+    }
+  }
+  return 0; // 删除成功
+}

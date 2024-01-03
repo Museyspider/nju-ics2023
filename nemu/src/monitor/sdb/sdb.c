@@ -202,8 +202,15 @@ static int cmd_w(char *args)
 
 static int cmd_d(char *args)
 {
-  cpu_exec(-1);
-  return 0;
+  int num = strtoval(args);
+  int res = del_watchpoint(num);
+  if (res == 0)
+  {
+    Log("删除成功！");
+    return 0;
+  }
+  Log("删除失败！");
+  return 1;
 }
 
 static int cmd_help(char *args);
