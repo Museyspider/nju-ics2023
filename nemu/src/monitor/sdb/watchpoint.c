@@ -110,7 +110,6 @@ int watchpoint_val()
 int del_watchpoint(int num)
 {
   WP *cur_h = head;
-  WP *cur_f = free_;
   if (head->NO == num)
   {
     WP *t = head->next;
@@ -125,13 +124,13 @@ int del_watchpoint(int num)
     {
       WP *c = cur_h->next;
       cur_h->next = cur_h->next->next;
-      c->next = cur_f;
-      cur_f = c;
+      c->next = free_;
+      free_ = c;
       return 0;
     }
     cur_h = cur_h->next;
   }
-  return 0; // 删除成功
+  return 1; // 删除失败，head中没有该下标
 }
 
 void print_head_free_()
