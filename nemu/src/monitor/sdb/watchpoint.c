@@ -139,7 +139,7 @@ void print_watchpoint()
   printf("No\t\taddr\t\tval\t\twhat\n");
   while (cur != NULL)
   {
-    printf("%d\t\t0x%x\t\t%d\t\t \n", cur->NO, cur->expr_addr, cur->val);
+    printf("%d\t\t0x%x\t%d\t\t \n", cur->NO, cur->expr_addr, cur->val);
     cur = cur->next;
   }
 }
