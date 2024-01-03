@@ -136,7 +136,7 @@ int del_watchpoint(int num)
 void print_watchpoint()
 {
   WP *cur = head;
-  printf("No\t\taddr\t\tval\t\twhat\n");
+  printf("No\t\taddr\t\tval(十进制)\t\twhat\n");
   while (cur != NULL)
   {
     printf("%d\t\t0x%x\t%d\t\t \n", cur->NO, cur->expr_addr, cur->val);
