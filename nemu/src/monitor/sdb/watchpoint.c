@@ -131,3 +131,19 @@ int del_watchpoint(int num)
   }
   return 0; // 删除成功
 }
+
+void print_head_free_()
+{
+  WP *cur_h = head;
+  WP *cur_f = free_;
+  while (cur_h != NULL)
+  {
+    Log("cur_h=%d\n", cur_h->NO);
+    cur_h = cur_h->next;
+  }
+  while (cur_f != NULL)
+  {
+    Log("cur_f=%d\n", cur_f->NO);
+    cur_f = cur_f->next;
+  }
+}

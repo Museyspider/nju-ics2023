@@ -210,6 +210,7 @@ static int cmd_d(char *args)
     return 0;
   }
   Log("删除失败！");
+  print_head_free_();
   return 1;
 }
 
