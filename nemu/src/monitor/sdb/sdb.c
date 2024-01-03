@@ -197,6 +197,7 @@ static int cmd_w(char *args)
   cur->val = *guest_to_host(cur->expr_addr);
   printf("val=%d\n", cur->val);
   cpu_exec(-1);
+  printf("--------------\n");
   printf("%d\n", success);
   return 0;
 }
