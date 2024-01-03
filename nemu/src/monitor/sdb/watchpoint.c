@@ -93,6 +93,7 @@ int watchpoint_val()
   while (cur != NULL)
   {
     printf("cur->expr_addr=%x\n", cur->expr_addr);
+    printf("cur->expr_addr=%d\n", *(uint32_t *)(uint64_t)cur->expr_addr);
     if (cur->val != *((uint32_t *)(uint64_t)cur->expr_addr))
     {
       cur->val = *((uint32_t *)(uint64_t)cur->expr_addr);
