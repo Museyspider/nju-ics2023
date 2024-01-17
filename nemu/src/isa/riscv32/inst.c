@@ -79,6 +79,7 @@ static void decode_operand(Decode *s, int *rd, word_t *src1, word_t *src2, word_
   }
 }
 
+// 译码工作
 static int decode_exec(Decode *s)
 {
   int rd = 0;
