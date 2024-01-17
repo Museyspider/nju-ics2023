@@ -63,8 +63,10 @@ $(OBJ_DIR)/%.o: %.cc
 debug:
 	@echo $(INCLUDES)
 	@echo $(OBJ_DIR)
+	@echo $(PRES)
+	@echo $(OBJS)
 
-app: $(BINARY)
+app: $(BINARY) $(PRES)
 
 $(BINARY):: $(OBJS) $(ARCHIVES) 
 	@echo + LD $@
