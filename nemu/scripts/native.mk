@@ -49,5 +49,6 @@ clean-all: clean distclean clean-tools
 
 debug:
 	@echo $(CFLAGS)
+	@echo $(NEMU_EXEC)
 
 .PHONY: run gdb run-env clean-tools clean-all $(clean-tools) debug

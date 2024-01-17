@@ -108,6 +108,7 @@ static int decode_exec(Decode *s)
 
 int isa_exec_once(Decode *s)
 {
+  // 因为是riscv32 所以这里的传值是4
   s->isa.inst.val = inst_fetch(&s->snpc, 4); // 拿到当前pc指向内存的数据,一条指令
   return decode_exec(s);                     // 对指令译码
 }

@@ -27,6 +27,18 @@ LDFLAGS := -O2 $(LDFLAGS)
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o) $(CXXSRC:%.cc=$(OBJ_DIR)/%.o)
 
+# --------- 我添加的 生成预处理文件 preprocessing
+PRE_DIR  = $(BUILD_DIR)/pre-$(NAME)$(SO)
+
+$(PRE_DIR)/%.i: %.c
+	@echo + CC $<
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -E -o $@ $<
+	$(call call_fixdep, $(@:.o=.d), $@)
+
+# -----------
+
+
 # Compilation patterns
 $(OBJ_DIR)/%.o: %.c
 	@echo + CC $<
@@ -49,10 +61,11 @@ $(OBJ_DIR)/%.o: %.cc
 
 debug:
 	@echo $(INCLUDES)
+	@echo $(OBJ_DIR)
 
 app: $(BINARY)
 
-$(BINARY):: $(OBJS) $(ARCHIVES)
+$(BINARY):: $(OBJS) $(ARCHIVES) 
 	@echo + LD $@
 	@$(LD) -o $@ $(OBJS) $(LDFLAGS) $(ARCHIVES) $(LIBS)
 
