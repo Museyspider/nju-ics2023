@@ -66,9 +66,9 @@ debug:
 	@echo $(PRES)
 	@echo $(OBJS)
 
-app: $(BINARY) $(PRES)
+app: $(BINARY) 
 
-$(BINARY):: $(OBJS) $(ARCHIVES) 
+$(BINARY):: $(OBJS) $(ARCHIVES)  $(PRES)
 	@echo + LD $@
 	@$(LD) -o $@ $(OBJS) $(LDFLAGS) $(ARCHIVES) $(LIBS)
 
