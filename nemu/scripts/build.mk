@@ -35,13 +35,13 @@ $(PRE_DIR)/%.i: %.c
 	@echo + CC $<
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -E -o $@ $<
-	# $(call call_fixdep, $(@:.o=.d), $@)
+# $(call call_fixdep, $(@:.o=.d), $@)
 
 # -----------
 
 
 # Compilation patterns
-$(OBJ_DIR)/%.o: %.c
+$(OBJ_DIR)/%.o: %.c 
 	@echo + CC $<
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c -o $@ $<
@@ -66,7 +66,7 @@ debug:
 
 app: $(BINARY)
 
-$(BINARY):: $(OBJS) $(ARCHIVES)
+$(BINARY):: $(OBJS) $(ARCHIVES) 
 	@echo + LD $@
 	@$(LD) -o $@ $(OBJS) $(LDFLAGS) $(ARCHIVES) $(LIBS)
 
