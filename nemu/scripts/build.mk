@@ -29,12 +29,13 @@ OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o) $(CXXSRC:%.cc=$(OBJ_DIR)/%.o)
 
 # --------- 我添加的 生成预处理文件 preprocessing
 PRE_DIR  = $(BUILD_DIR)/pre-$(NAME)$(SO)
+PRES = $(SRCS:%.c=$(PRE_DIR)/%.i)
 
 $(PRE_DIR)/%.i: %.c
 	@echo + CC $<
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -E -o $@ $<
-	$(call call_fixdep, $(@:.o=.d), $@)
+	# $(call call_fixdep, $(@:.o=.d), $@)
 
 # -----------
 
@@ -65,7 +66,7 @@ debug:
 
 app: $(BINARY)
 
-$(BINARY):: $(OBJS) $(ARCHIVES) 
+$(BINARY):: $(OBJS) $(ARCHIVES)
 	@echo + LD $@
 	@$(LD) -o $@ $(OBJS) $(LDFLAGS) $(ARCHIVES) $(LIBS)
 
