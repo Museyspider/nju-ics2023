@@ -81,7 +81,7 @@ static void decode_operand(Decode *s, int *rd, word_t *src1, word_t *src2, word_
   case TYPE_I:
     printf("rs1=%d\n", rs1);
     src1R();
-
+    printf("-----------\n");
     immI();
     break;
   case TYPE_U:
