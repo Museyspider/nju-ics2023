@@ -28,6 +28,10 @@ enum
   TYPE_U,
   TYPE_S,
   TYPE_N, // none
+
+  // ----------
+  TYPE_J, // 直接跳转
+  // ----------
 };
 
 #define src1R()     \
@@ -56,6 +60,16 @@ enum
     *imm = (SEXT(BITS(i, 31, 25), 7) << 5) | BITS(i, 11, 7); \
   } while (0)
 
+// -------------- 我添加的内容
+// 指令J 是先确定 1位 再确定8位, 再确定1位 再确定10位
+#define immJ()                                                                                                     \
+  do                                                                                                               \
+  {                                                                                                                \
+    *imm = ((((SEXT(BITS(i, 31, 30), 1) << 8) | BITS(i, 19, 12)) << 1 | BITS(i, 21, 20)) << 10 | BITS(i, 30, 21)); \
+  } while (0)
+
+// --------------
+
 static void decode_operand(Decode *s, int *rd, word_t *src1, word_t *src2, word_t *imm, int type)
 {
   uint32_t i = s->isa.inst.val;
@@ -76,6 +90,12 @@ static void decode_operand(Decode *s, int *rd, word_t *src1, word_t *src2, word_
     src2R();
     immS();
     break;
+
+  // ----------
+  case TYPE_J:
+
+    break;
+    // ----------
   }
 }
 
@@ -96,6 +116,8 @@ static int decode_exec(Decode *s)
   INSTPAT_START();
   // ----添加的指令-----------------
   INSTPAT("??????? ????? ????? 000 ????? 00100 11", li, I, R(rd) = R(0) + imm); // li 伪指令 用addi指令实现  li rd,13 => addi rd,x0,13
+
+  INSTPAT("??????? ????? ????? 000 ????? 00100 11", li, I, R(rd) = R(0) + imm);
 
   // ------------------------------
 
